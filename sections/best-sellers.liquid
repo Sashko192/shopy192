@@ -1,20 +1,39 @@
 {% schema %}
 {
-  "name": "Best Sellers ",
+  "name": "Best Sellers",
   "settings": [
     {
       "type": "collection",
       "id": "collection",
       "label": "Select collection"
+    },
+    {
+      "type": "color",
+      "id": "collection_title_color",
+      "label": "Collection title color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "product_title_color",
+      "label": "Product title color",
+      "default": "#222222"
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Price color",
+      "default": "#ff0000"
     }
   ],
   "presets": [
     {
-      "name": "Best "
+      "name": "Best Sellers"
     }
   ]
 }
 {% endschema %}
+
 
 <div class="best-sellers">
   {% if section.settings.collection != blank %}
@@ -41,22 +60,42 @@
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  justify-content: center; /* вирівнювання по центру */
+  padding: 0 20px; /* відступи зліва і справа від сторінки */
 }
 
 .best-sellers .grid--4 .product-card {
-  width: calc(25% - 15px); /* 4 товари в ряд */
+  width: calc(22% - 15px); /* трохи менше по ширині, щоб з’явився простір */
   box-sizing: border-box;
 }
 
 @media (max-width: 749px) {
   .best-sellers .grid--4 .product-card {
-    width: 100%; /* на мобайлі слайдер/вертикально */
+    width: 100%; /* мобайл — вертикально */
   }
 }
 
 .product-card img {
-  width: 100%;
-  height: auto;
+  width: auto;   /* ширина автоматично, щоб не розтягувалось */
+  max-width: 100%; 
+  height: 300px; /* збільшуємо висоту */
+  object-fit: cover; /* обрізаємо фото красиво, без деформації */
+  display: block;
+  margin: 0 auto; /* центр зображення в картці */
+}
+.product-card h3.collection-title {
+  margin: 5px 0 2px 0; /* зверху 5px, знизу 2px */
+  font-size: 14px; /* можна трохи зменшити шрифт */
+}
+
+.product-card h4.product-title {
+  margin: 2px 0; /* зверху і знизу 2px */
+  font-size: 16px;
+}
+
+.product-card p.product-price {
+  margin: 2px 0 5px 0; /* зверху 2px, знизу 5px */
+  font-size: 15px;
 }
 
 .collection-link {
