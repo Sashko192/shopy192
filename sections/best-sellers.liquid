@@ -1,0 +1,66 @@
+{% schema %}
+{
+  "name": "Best Sellers",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Select collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Best Sellers"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="best-sellers">
+  {% if section.settings.collection != blank %}
+    {% assign products = section.settings.collection.products | limit: 4 %}
+    <div class="grid grid--4">
+      {% for product in products %}
+        <div class="product-card">
+          <a href="{{ product.url }}">
+            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+          </a>
+          <h3 class="collection-title">{{ section.settings.collection.title }}</h3>
+          <h4 class="product-title">{{ product.title }}</h4>
+          <p class="product-price">{{ product.price | money }}</p>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="collection-link">
+      <a href="{{ section.settings.collection.url }}">Подивитись колекцію</a>
+    </div>
+  {% endif %}
+</div>
+<style>
+.best-sellers .grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.best-sellers .grid--4 .product-card {
+  width: calc(25% - 15px); /* 4 товари в ряд */
+  box-sizing: border-box;
+}
+
+@media (max-width: 749px) {
+  .best-sellers .grid--4 .product-card {
+    width: 100%; /* на мобайлі слайдер/вертикально */
+  }
+}
+
+.product-card img {
+  width: 100%;
+  height: auto;
+}
+
+.collection-link {
+  text-align: center;
+  margin-top: 20px;
+}
+</style>
