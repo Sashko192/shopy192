@@ -83,20 +83,20 @@
   display: block;
   margin: 0 auto; /* центр зображення в картці */
 }
+
 .product-card h3.collection-title {
-  margin: 5px 0 2px 0; /* зверху 5px, знизу 2px */
-  font-size: 14px; /* можна трохи зменшити шрифт */
+  color: {{ section.settings.collection_title_color }};
 }
 
 .product-card h4.product-title {
-  margin: 2px 0; /* зверху і знизу 2px */
-  font-size: 16px;
+  color: {{ section.settings.product_title_color }};
 }
 
 .product-card p.product-price {
-  margin: 2px 0 5px 0; /* зверху 2px, знизу 5px */
-  font-size: 15px;
+  color: {{ section.settings.price_color }};
 }
+
+
 
 .collection-link {
   text-align: center;
