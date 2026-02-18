@@ -29,7 +29,6 @@
     },
     "featured_collection": {
       "type": "featured-collection",
-      "disabled": true,
       "settings": {
         "collection": "all",
         "products_to_show": 8,
@@ -60,10 +59,7 @@
       "type": "best-sellers",
       "name": "Best ",
       "settings": {
-        "collection": "best-seller",
-        "collection_title_color": "#1f727c",
-        "product_title_color": "#1f727c",
-        "price_color": "#1f727c"
+        "collection": "best-seller"
       }
     }
   },
