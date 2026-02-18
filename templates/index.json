@@ -12,18 +12,15 @@
     "image_banner": {
       "type": "image-banner",
       "settings": {
-        "image": "shopify://shop_images/comfortable-living-room-cat_925x_8d10d4a2-304f-441b-b1ea-6669ba4d2c5c.jpg",
-        "image_2": "shopify://shop_images/diy-organic-candle_925x_027b3cc7-1578-4602-a51f-6509c4c6f818.jpg",
+        "image": "shopify://shop_images/putting-on-your-shoes_925x_88c970ad-c59b-4546-a886-7ff77725986d.jpg",
+        "image_2": "shopify://shop_images/womens-red-t-shirt_925x_6cff683d-ff15-48e6-be4f-d9caba2f0400.jpg",
+        "image_3": "shopify://shop_images/red-plaid-shirt_925x_771005f7-6dab-4276-9214-00a1f33f44ed.jpg",
         "image_overlay_opacity": 0,
         "image_height": "small",
-        "image_behavior": "none",
+        "image_behavior": "ambient",
         "desktop_content_position": "bottom-center",
         "desktop_content_alignment": "left",
-        "show_text_box": false,
-        "color_scheme": "scheme-3",
-        "stack_images_on_mobile": false,
-        "mobile_content_alignment": "center",
-        "show_text_below": false
+        "color_scheme": "scheme-3"
       }
     },
     "featured_collection": {
