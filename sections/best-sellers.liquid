@@ -46,6 +46,9 @@
       {% for product in products %}
 
         <div class="product-card">
+          {% if product.metafields.custom.new_label %}
+            <span class="product-new-label">New</span>
+          {% endif %}
 
           <a href="{{ product.url }}">
             <img 
