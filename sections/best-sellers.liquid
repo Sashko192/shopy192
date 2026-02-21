@@ -36,64 +36,123 @@
 
 
 <div class="best-sellers">
-   {% if section.settings.collection != blank %}
-    <!-- Заголовок секції -->
+  {% if section.settings.collection != blank %}
+
     <h2 class="best-sellers-heading">Best Sellers</h2>
+
     {% assign products = section.settings.collection.products | limit: 4 %}
+
     <div class="grid grid--4">
       {% for product in products %}
+
         <div class="product-card">
+
           <a href="{{ product.url }}">
-           <img 
-  src="{{ product.featured_image | image_url: width: 800 }}" 
-  alt="{{ product.title }}"
-  loading="lazy"
->
- </a>
-          <h3 class="collection-title">{{ section.settings.collection.title }}</h3>
-          <h4 class="product-title">{{ product.title }}</h4>
-          <p class="product-price">{{ product.price | money }}</p>
+            <img 
+              class="product-image"
+              src="{{ product.featured_image | image_url: width: 800 }}" 
+              alt="{{ product.title }}"
+              loading="lazy"
+            >
+          </a>
+
+          <h3 class="collection-title">
+            {{ section.settings.collection.title }}
+          </h3>
+
+          <h4 class="product-title">
+            {{ product.title }}
+          </h4>
+
+          <p class="product-price">
+            {{ product.price | money }}
+          </p>
+
+          {% assign color_option_index = nil %}
+
+          {% for option in product.options %}
+            {% if option contains 'Color' or option contains 'Colour' or option contains 'Колір' %}
+              {% assign color_option_index = forloop.index0 %}
+            {% endif %}
+          {% endfor %}
+
+          {% if color_option_index != nil %}
+            <div class="color-variants">
+
+              {% assign used_colors = '' %}
+
+              {% for variant in product.variants %}
+
+                {% assign color_value = variant.options[color_option_index] %}
+
+                {% unless used_colors contains color_value %}
+
+                  {% assign used_colors = used_colors | append: color_value | append: ',' %}
+
+                  {% if variant.featured_media %}
+                    <button 
+                      class="color-swatch"
+                      data-image="{{ variant.featured_media | image_url: width: 800 }}"
+                      style="background-color: {{ color_value | downcase }};"
+                      aria-label="{{ color_value }}"
+                    ></button>
+                  {% endif %}
+
+                {% endunless %}
+
+              {% endfor %}
+
+            </div>
+          {% endif %}
+
         </div>
+
       {% endfor %}
     </div>
+
     <div class="collection-link">
-      <a href="{{ section.settings.collection.url }}">Подивитись колекцію</a>
+      <a href="{{ section.settings.collection.url }}">
+        Подивитись колекцію
+      </a>
     </div>
+
   {% endif %}
 </div>
+
+
 <style>
 .best-sellers-heading {
   color: {{ section.settings.collection_title_color }};
   text-align: center;
   font-size: 28px;
   font-weight: bold;
-  margin-bottom: 20px; /* відступ від сітки товарів */
+  margin-bottom: 20px;
 }
 
 .best-sellers .grid {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  justify-content: center; /* вирівнювання по центру */
-  padding: 0 20px; /* відступи зліва і справа від сторінки */
+  justify-content: center;
+  padding: 0 20px;
 }
 
 .best-sellers .grid--4 .product-card {
-  width: calc(20% - 20px); /* трохи вужчі */
+  width: calc(20% - 20px);
   box-sizing: border-box;
 }
 
-
 .product-card img {
   width: 100%;
-  height: 420px;   /* вище */
+  height: 420px;
   object-fit: cover;
   display: block;
 }
+
 .product-card h3,
 .product-card h4,
 .product-card p {
-  margin: 6px 0;   /* зменшуємо загальні відступи */
+  margin: 6px 0;
   line-height: 1.3;
 }
 
@@ -109,12 +168,36 @@
   color: {{ section.settings.price_color }};
 }
 
+.color-variants {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  justify-content: center;
+}
 
+.color-swatch {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.2s ease, border 0.2s ease;
+}
+
+.color-swatch:hover {
+  transform: scale(1.1);
+}
+
+.color-swatch.active {
+  border: 2px solid black;
+}
 
 .collection-link {
   text-align: center;
   margin-top: 20px;
 }
+
 .collection-link a {
   color: {{ section.settings.collection_title_color }};
 }
@@ -126,16 +209,14 @@
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-
     padding: 0 16px;
     gap: 16px;
-
-    justify-content: flex-start; /* ВАЖЛИВО */
+    justify-content: flex-start;
   }
 
   .best-sellers .grid--4 .product-card {
     flex: 0 0 80%;
-    width: auto;              /* прибираємо desktop width */
+    width: auto;
     scroll-snap-align: start;
   }
 
@@ -149,5 +230,32 @@
   }
 
 }
-
 </style>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  document.querySelectorAll(".color-swatch").forEach(button => {
+
+    button.addEventListener("click", function() {
+
+      const productCard = this.closest(".product-card");
+      const img = productCard.querySelector(".product-image");
+      const newImage = this.getAttribute("data-image");
+
+      productCard.querySelectorAll(".color-swatch")
+        .forEach(btn => btn.classList.remove("active"));
+
+      this.classList.add("active");
+
+      if (newImage && img) {
+        img.src = newImage;
+      }
+
+    });
+
+  });
+
+});
+</script>
