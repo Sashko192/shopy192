@@ -35,10 +35,20 @@
         "product_title_color": "#1f727c",
         "price_color": "#1f727c"
       }
+    },
+    "promo_banner_iyfdpc": {
+      "type": "promo-banner",
+      "name": "Promo Banner",
+      "settings": {
+        "banner_text": "",
+        "background_image": "shopify://shop_images/black-bag-over-the-shoulder_925x_074da68f-d626-4e63-820d-7575a5d462c0.jpg",
+        "sale_end": "2026-02-25T23:59:59"
+      }
     }
   },
   "order": [
     "image_banner",
-    "best_sellers_XiDFWR"
+    "best_sellers_XiDFWR",
+    "promo_banner_iyfdpc"
   ]
 }
