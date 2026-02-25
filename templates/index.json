@@ -44,11 +44,22 @@
         "background_image": "shopify://shop_images/generate-background-in-this-color-1f727c.png",
         "sale_end": "2026-02-25T23:59:59"
       }
+    },
+    "new_arrived_RNJeWx": {
+      "type": "new-arrived",
+      "name": "New Arrived",
+      "settings": {
+        "new_collection": "new-arrived",
+        "collection_title_color": "#1f727c",
+        "product_title_color": "#1f727c",
+        "price_color": "#1f727c"
+      }
     }
   },
   "order": [
     "image_banner",
     "best_sellers_XiDFWR",
-    "promo_banner_iyfdpc"
+    "promo_banner_iyfdpc",
+    "new_arrived_RNJeWx"
   ]
 }
